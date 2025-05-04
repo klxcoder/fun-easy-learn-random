@@ -38,6 +38,13 @@
       background-color: #f2f2f2;
     }
 
+    .buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+    }
+
     img {
       width: 30px;
       height: 30px;
@@ -162,12 +169,17 @@
             ))}
           </tbody>
         </table>
-        <button onClick={() => {
-          const newData = {}
-          setData(newData)
-          writeToLocalStorage('data', newData)
-          setId(id + 1)
-        }}>Reset progress</button>
+        <div className="buttons">
+          <button onClick={() => {
+            const newData = {}
+            setData(newData)
+            writeToLocalStorage('data', newData)
+            setId(id + 1)
+          }}>Reset progress</button>
+          <button onClick={() => {
+            setId(id + 1)
+          }}>Re-render</button>
+        </div>
       </div>;
     }
 
