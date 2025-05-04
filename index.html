@@ -37,6 +37,16 @@
     thead {
       background-color: #f2f2f2;
     }
+
+    img {
+      width: 30px;
+      height: 30px;
+      cursor: pointer;
+    }
+
+    img:hover {
+      background-color: aquamarine;
+    }
   </style>
 </head>
 
@@ -118,16 +128,20 @@
                 <td>{s.text}</td>
                 {languages.map(l => (
                   <th key={l}>
-                    {!data[[s.text, l].join(".")] && <input
-                      type="checkbox"
-                      checked={!!data[[s.text, l].join(".")]}
-                      onChange={() => {
-                        const k = [s.text, l].join(".")
-                        const newData = { ...data, [k]: !data[k] }
-                        setData(newData)
-                        writeToLocalStorage('data', newData)
-                      }}
-                    />}
+                    {!data[[s.text, l].join(".")] && (<div>
+                      <input
+                        type="checkbox"
+                        checked={!!data[[s.text, l].join(".")]}
+                        onChange={() => {
+                          const k = [s.text, l].join(".")
+                          const newData = { ...data, [k]: !data[k] }
+                          setData(newData)
+                          writeToLocalStorage('data', newData)
+                        }}
+                      />
+                      <img src="./check.svg" />
+                      <img src="./close.svg" />
+                    </div>)}
                   </th>
                 ))}
               </tr>
