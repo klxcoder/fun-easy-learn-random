@@ -213,10 +213,12 @@
         </table>
         <div className="buttons">
           <button onClick={() => {
-            const newData = {}
-            setData(newData)
-            writeToLocalStorage('data', newData)
-            setId(id + 1)
+            if (confirm("reset progress?")) {
+              const newData = {}
+              setData(newData)
+              writeToLocalStorage('data', newData)
+              setId(id + 1)
+            }
           }}>Reset progress</button>
           <button onClick={() => {
             setId(id + 1)
