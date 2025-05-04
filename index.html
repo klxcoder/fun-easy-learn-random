@@ -8,6 +8,13 @@
   <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <style>
+    .app {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
     table {
       width: 100%;
       border-collapse: collapse;
@@ -82,11 +89,17 @@
       "Japanese",
     ]
 
+    function writeToLocalStorage(key, value) {
+      localStorage.setItem(key, JSON.stringify(value));
+    }
+
     function MyApp() {
 
-      return <div>
+      const [data, setData] = React.useState(JSON.parse(localStorage.getItem('data')) || {});
+
+      return <div className="app">
         <table>
-          <caption>Student Grades</caption>
+          <caption>Fun Easy Learn</caption>
           <thead>
             <tr>
               <th>Topic</th>
@@ -101,13 +114,27 @@
                 <td>{s.text}</td>
                 {languages.map(l => (
                   <th key={l}>
-                    <input type="checkbox" />
+                    <input
+                      type="checkbox"
+                      checked={!!data[[s.text, l].join(".")]}
+                      onChange={() => {
+                        const k = [s.text, l].join(".")
+                        const newData = { ...data, [k]: !data[k] }
+                        setData(newData)
+                        writeToLocalStorage('data', newData)
+                      }}
+                    />
                   </th>
                 ))}
               </tr>
             ))}
           </tbody>
         </table>
+        <button onClick={() => {
+          const newData = {}
+          setData(newData)
+          writeToLocalStorage('data', newData)
+        }}>Reset progress</button>
       </div>;
     }
 
