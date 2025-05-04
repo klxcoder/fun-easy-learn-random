@@ -108,16 +108,19 @@
     }
 
     function RightWrong({ data, setData, k }) {
+      const [hide, setHide] = React.useState(false)
       return (
         <div>
-          <img
+          {!hide && <img
             onClick={() => {
               const newData = { ...data, [k]: true }
               setData(newData)
               writeToLocalStorage('data', newData)
             }}
-            src="./check.svg" />
-          <img src="./close.svg" />
+            src="./check.svg" />}
+          <img
+            onClick={() => setHide(true)}
+            src="./close.svg" />
         </div>
       )
     }
