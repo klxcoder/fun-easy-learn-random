@@ -141,9 +141,11 @@
       },
     ]
 
-    const subTopics = topics.reduce((pre, cur) => [...pre, ...cur.subTopics.map(s => ({
+    const subTopics = topics.reduce((pre, cur) => [...pre, ...cur.subTopics.map((s, subIndex) => ({
       topic: cur.topic,
       text: s,
+      subIndex: subIndex,
+      length: cur.subTopics.length,
     }))], [])
 
     const languages = [
@@ -196,7 +198,7 @@
           <tbody>
             {subTopics.map(s => (
               <tr key={s.text}>
-                <td>{s.topic}</td>
+                {s.subIndex === 0 && <td rowspan={s.length}>{s.topic}</td>}
                 <td>{s.text}</td>
                 {languages.map(l => (
                   <th key={l}>
