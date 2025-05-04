@@ -129,17 +129,14 @@
                 {languages.map(l => (
                   <th key={l}>
                     {!data[[s.text, l].join(".")] && (<div>
-                      <input
-                        type="checkbox"
-                        checked={!!data[[s.text, l].join(".")]}
-                        onChange={() => {
+                      <img
+                        onClick={() => {
                           const k = [s.text, l].join(".")
-                          const newData = { ...data, [k]: !data[k] }
+                          const newData = { ...data, [k]: true }
                           setData(newData)
                           writeToLocalStorage('data', newData)
                         }}
-                      />
-                      <img src="./check.svg" />
+                        src="./check.svg" />
                       <img src="./close.svg" />
                     </div>)}
                   </th>
