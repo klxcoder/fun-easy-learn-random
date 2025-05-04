@@ -129,7 +129,12 @@
 
       const [data, setData] = React.useState(JSON.parse(localStorage.getItem('data')) || {});
 
-      return <div className="app">
+      const [id, setId] = React.useState(0)
+
+      return <div
+        key={id}
+        className="app"
+      >
         <table>
           <caption>Fun Easy Learn</caption>
           <thead>
@@ -161,6 +166,7 @@
           const newData = {}
           setData(newData)
           writeToLocalStorage('data', newData)
+          setId(id + 1)
         }}>Reset progress</button>
       </div>;
     }
