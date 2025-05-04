@@ -107,6 +107,21 @@
       localStorage.setItem(key, JSON.stringify(value));
     }
 
+    function RightWrong({ data, setData, k }) {
+      return (
+        <div>
+          <img
+            onClick={() => {
+              const newData = { ...data, [k]: true }
+              setData(newData)
+              writeToLocalStorage('data', newData)
+            }}
+            src="./check.svg" />
+          <img src="./close.svg" />
+        </div>
+      )
+    }
+
     function MyApp() {
 
       const [data, setData] = React.useState(JSON.parse(localStorage.getItem('data')) || {});
@@ -128,17 +143,11 @@
                 <td>{s.text}</td>
                 {languages.map(l => (
                   <th key={l}>
-                    {!data[[s.text, l].join(".")] && (<div>
-                      <img
-                        onClick={() => {
-                          const k = [s.text, l].join(".")
-                          const newData = { ...data, [k]: true }
-                          setData(newData)
-                          writeToLocalStorage('data', newData)
-                        }}
-                        src="./check.svg" />
-                      <img src="./close.svg" />
-                    </div>)}
+                    {!data[[s.text, l].join(".")] && <RightWrong
+                      data={data}
+                      setData={setData}
+                      k={[s.text, l].join(".")}
+                    />}
                   </th>
                 ))}
               </tr>
