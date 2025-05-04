@@ -61,156 +61,90 @@
   <div id="root"></div>
   <script type="text/babel">
 
-    const subTopics = [
+    const topics = [
       {
         topic: 'Body',
-        text: 'Head & Face',
-      },
-      {
-        topic: 'Body',
-        text: 'Body Parts',
+        subTopics: [
+          'Head & Face',
+          'Body Parts',
+        ]
       },
       {
         topic: 'House',
-        text: 'Furniture',
-      },
-      {
-        topic: 'House',
-        text: 'Home Décor',
-      },
-      {
-        topic: 'Shopping',
-        text: 'Appliance Shop',
+        subTopics: [
+          'Furniture',
+          'Home Décor',
+        ],
       },
       {
         topic: 'Shopping',
-        text: 'Kitchenware',
-      },
-      {
-        topic: 'Shopping',
-        text: 'Household Products',
-      },
-      {
-        topic: 'Shopping',
-        text: 'Stationery',
-      },
-      {
-        topic: 'Shopping',
-        text: "Kids' Shop",
-      },
-      {
-        topic: 'Shopping',
-        text: "Cosmetics",
-      },
-      {
-        topic: 'Shopping',
-        text: "Bath Products",
+        subTopics: [
+          'Appliance Shop',
+          'Kitchenware',
+          'Household Products',
+          'Stationery',
+          "Kids' Shop",
+          "Cosmetics",
+          "Bath Products",
+        ],
       },
       {
         topic: 'Food & Drinks',
-        text: "Fruits",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Vegetables",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Meat",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Fish & Seafood",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Dairy Products",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Breads",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Grains, Nuts & Seeds",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Condiments",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Sweets",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Meals",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Dishes",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Describing Food",
-      },
-      {
-        topic: 'Food & Drinks',
-        text: "Non-Alcoholic Drinks",
+        subTopics: [
+          "Fruits",
+          "Vegetables",
+          "Meat",
+          "Fish & Seafood",
+          "Dairy Products",
+          "Breads",
+          "Grains, Nuts & Seeds",
+          "Condiments",
+          "Sweets",
+          "Meals",
+          "Dishes",
+          "Describing Food",
+          "Non-Alcoholic Drinks",
+        ],
       },
       {
         topic: 'Transport',
-        text: "Road Transport",
+        subTopics: [
+          "Road Transport"
+        ],
       },
       {
         topic: 'Communications',
-        text: "TV & Radio",
-      },
-      {
-        topic: 'Communications',
-        text: "Computers",
-      },
-      {
-        topic: 'Communications',
-        text: "Internet",
-      },
-      {
-        topic: 'Communications',
-        text: "Phones",
+        subTopics: [
+          "TV & Radio",
+          "Computers",
+          "Internet",
+          "Phones",
+        ],
       },
       {
         topic: 'Animal',
-        text: 'Domestic Animals',
-      },
-      {
-        topic: 'Animal',
-        text: 'Domestic Birds',
-      },
-      {
-        topic: 'Animal',
-        text: 'Wild Animals',
-      },
-      {
-        topic: 'Animal',
-        text: 'Wild Birds',
-      },
-      {
-        topic: 'Animal',
-        text: 'Amphibians & Reptiles',
-      },
-      {
-        topic: 'Animal',
-        text: 'Insects & Arachnids',
+        subTopics: [
+          'Domestic Animals',
+          'Domestic Birds',
+          'Wild Animals',
+          'Wild Birds',
+          'Amphibians & Reptiles',
+          'Insects & Arachnids',
+        ],
       },
       {
         topic: 'System',
-        text: 'Cardinal Numerals',
-      },
-      {
-        topic: 'System',
-        text: 'Colours',
+        subTopics: [
+          'Cardinal Numerals',
+          'Colours',
+        ],
       },
     ]
+
+    const subTopics = topics.reduce((pre, cur) => [...pre, ...cur.subTopics.map(s => ({
+      topic: cur.topic,
+      text: s,
+    }))], [])
 
     const languages = [
       "Chinese",
