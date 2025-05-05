@@ -198,7 +198,7 @@
           <tbody>
             {subTopics.map(s => (
               <tr key={s.text}>
-                {s.subIndex === 0 && <td rowspan={s.length}>{s.topic}</td>}
+                {s.subIndex === 0 && <td rowSpan={s.length}>{s.topic}</td>}
                 <td>{s.text}</td>
                 {languages.map(l => (
                   <th key={l}>
