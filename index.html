@@ -204,9 +204,9 @@
             <tr>
               <th>Topic</th>
               <th>Sub-Topic</th>
-              {languages.map(l => <th
+              {languages.map((l, index) => <th
                 key={l}
-                className="language"
+                className={`language ${index === 0 ? "active" : ""}`}
                 onClick={() => {
                   const arr = [...languages]
                   const index = arr.indexOf(l);
@@ -229,8 +229,11 @@
                   className="subTopic"
                   onClick={() => setSubTopic(s.text)}
                 >{s.text}</td>
-                {languages.map(l => (
-                  <th key={l}>
+                {languages.map((l, index) => (
+                  <th
+                    key={l}
+                    className={index === 0 ? "active" : ""}
+                  >
                     {!data[[s.text, l].join(".")] && <RightWrong
                       data={data}
                       setData={setData}
