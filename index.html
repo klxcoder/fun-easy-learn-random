@@ -38,7 +38,8 @@
       background-color: #f2f2f2;
     }
 
-    .subTopic {
+    .subTopic,
+    .language {
       user-select: none;
       cursor: pointer;
     }
@@ -157,12 +158,6 @@
       length: cur.subTopics.length,
     }))], [])
 
-    const languages = [
-      "Chinese",
-      "Spanish",
-      "Japanese",
-    ]
-
     function writeToLocalStorage(key, value) {
       localStorage.setItem(key, JSON.stringify(value));
     }
@@ -193,6 +188,12 @@
 
       const [subTopic, setSubTopic] = React.useState('');
 
+      const [languages, setLanguages] = React.useState([
+        "Chinese",
+        "Spanish",
+        "Japanese",
+      ])
+
       return <div
         key={id}
         className="app"
@@ -203,7 +204,19 @@
             <tr>
               <th>Topic</th>
               <th>Sub-Topic</th>
-              {languages.map(l => <th key={l}>{l}</th>)}
+              {languages.map(l => <th
+                key={l}
+                className="language"
+                onClick={() => {
+                  const arr = [...languages]
+                  const index = arr.indexOf(l);
+                  if (index !== -1) {
+                    const [item] = arr.splice(index, 1);
+                    arr.unshift(item);
+                  }
+                  setLanguages(arr)
+                }}
+              >{l}</th>)}
             </tr>
           </thead>
           <tbody>
