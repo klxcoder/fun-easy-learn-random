@@ -38,6 +38,15 @@
       background-color: #f2f2f2;
     }
 
+    .subTopic {
+      user-select: none;
+      cursor: pointer;
+    }
+
+    .active {
+      background-color: aqua;
+    }
+
     .buttons {
       width: 100%;
       display: flex;
@@ -180,7 +189,9 @@
 
       const [data, setData] = React.useState(JSON.parse(localStorage.getItem('data')) || {});
 
-      const [id, setId] = React.useState(0)
+      const [id, setId] = React.useState(0);
+
+      const [subTopic, setSubTopic] = React.useState('');
 
       return <div
         key={id}
@@ -197,9 +208,14 @@
           </thead>
           <tbody>
             {subTopics.map(s => (
-              <tr key={s.text}>
+              <tr key={s.text}
+                className={subTopic === s.text ? "active" : ""}
+              >
                 {s.subIndex === 0 && <td rowSpan={s.length}>{s.topic}</td>}
-                <td>{s.text}</td>
+                <td
+                  className="subTopic"
+                  onClick={() => setSubTopic(s.text)}
+                >{s.text}</td>
                 {languages.map(l => (
                   <th key={l}>
                     {!data[[s.text, l].join(".")] && <RightWrong
