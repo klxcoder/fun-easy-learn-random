@@ -46,6 +46,13 @@
       cursor: pointer;
     }
 
+    .languageWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
     .active {
       background-color: rgba(0, 255, 255, 0.2);
     }
@@ -72,6 +79,13 @@
 <body>
   <div id="root"></div>
   <script type="text/babel">
+
+    function getRandomValue(arr) {
+      if (!arr.length) return undefined;
+      const index = Math.floor(Math.random() * arr.length);
+      return arr[index];
+    }
+
 
     const topics = [
       {
@@ -208,17 +222,35 @@
               <th>Sub-Topic</th>
               {languages.map((l, index) => <th
                 key={l}
-                className={`language ${index === 0 ? "active" : ""}`}
-                onClick={() => {
-                  const arr = [...languages]
-                  const index = arr.indexOf(l);
-                  if (index !== -1) {
-                    const [item] = arr.splice(index, 1);
-                    arr.unshift(item);
-                  }
-                  setLanguages(arr)
-                }}
-              >{l}</th>)}
+                className={index === 0 ? "active" : ""}
+              >
+                <div
+                  className="languageWrapper"
+                >
+                  <div
+                    className="language"
+                    onClick={() => {
+                      const arr = [...languages]
+                      const index = arr.indexOf(l);
+                      if (index !== -1) {
+                        const [item] = arr.splice(index, 1);
+                        arr.unshift(item);
+                      }
+                      setLanguages(arr)
+                    }}
+                  >{l}</div>
+                  {index === 0 && <img
+                    onClick={() => {
+                      const notAnswered = subTopics.filter(s => !data[[s.text, languages[0]].join(".")]);
+                      const s = getRandomValue(notAnswered)
+                      if (s) {
+                        setSubTopic(s.text)
+                      }
+                    }}
+                    src="./shuffle.svg"
+                  />}
+                </div>
+              </th>)}
             </tr>
           </thead>
           <tbody>
