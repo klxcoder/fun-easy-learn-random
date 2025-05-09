@@ -238,7 +238,15 @@
                       }
                       setLanguages(arr)
                     }}
-                  >{l}</div>
+                  >{l} ({(() => {
+                    let cnt = 0
+                    for (const s of subTopics) {
+                      if (data[[s.text, l].join(".")]) {
+                        cnt++
+                      }
+                    }
+                    return cnt
+                  })()}/{subTopics.length})</div>
                   {index === 0 && <img
                     onClick={() => {
                       const notAnswered = subTopics.filter(s => !data[[s.text, languages[0]].join(".")]);
